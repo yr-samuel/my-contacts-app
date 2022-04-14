@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import {
 	Container,
 	Header,
@@ -9,17 +11,19 @@ import {
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import trash from '../../assets/images/icons/trash.svg';
+import Modal from '../../components/Modal';
 
 export default function Home() {
 	return (
 		<Container>
+			<Modal />
 			<InputSearchContainer>
 				<input type="text" placeholder="Pesquisar contato" />
 			</InputSearchContainer>
 
 			<Header>
 				<strong>3 contatos</strong>
-				<a href="/">Novo Contato</a>
+				<Link to="/new">Novo Contato</Link>
 			</Header>
 
 			<ListContainer>
@@ -40,45 +44,9 @@ export default function Home() {
 						<span>(15) 99687-4936</span>
 					</div>
 					<div className="actions">
-						<a href="/">
+						<Link to="/edit/123">
 							<img src={edit} alt="Edit contact" />
-						</a>
-						<button type="button">
-							<img src={trash} alt="Delete contact" />
-						</button>
-					</div>
-				</Card>
-				<Card>
-					<div className="info">
-						<div className="contact-name">
-							<strong>Samuel Araújo</strong>
-							<small>instagram</small>
-						</div>
-						<span>samuel.oliveira@eduzz.com</span>
-						<span>(15) 99687-4936</span>
-					</div>
-					<div className="actions">
-						<a href="/">
-							<img src={edit} alt="Edit contact" />
-						</a>
-						<button type="button">
-							<img src={trash} alt="Delete contact" />
-						</button>
-					</div>
-				</Card>
-				<Card>
-					<div className="info">
-						<div className="contact-name">
-							<strong>Samuel Araújo</strong>
-							<small>instagram</small>
-						</div>
-						<span>samuel.oliveira@eduzz.com</span>
-						<span>(15) 99687-4936</span>
-					</div>
-					<div className="actions">
-						<a href="/">
-							<img src={edit} alt="Edit contact" />
-						</a>
+						</Link>
 						<button type="button">
 							<img src={trash} alt="Delete contact" />
 						</button>
