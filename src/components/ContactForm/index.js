@@ -10,18 +10,27 @@ export default function ContactForm({ buttonLabel }) {
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [category, setCategory] = useState('');
+	const [errors, setErrors] = useState([]);
+
+	function handleNameChange(event) {
+		const { value, name: fieldName } = event.target;
+		setName(value);
+
+		if (!value) {
+			setErrors((prevState) => [...prevState, { field: fieldName, message: 'Nome é obrigatório' }]);
+		} else {
+			setErrors((prevState) => prevState.filter((error) => error.field !== fieldName));
+		}
+	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log({
-			name, email, phone, category,
-		});
 	};
 
 	return (
 		<Form onSubmit={handleSubmit}>
 			<FormGroup>
-				<Input placeholder="Nome" value={name} onChange={(event) => setName(event.target.value)} />
+				<Input placeholder="Nome" name="name" value={name} onChange={handleNameChange} />
 			</FormGroup>
 			<FormGroup>
 				<Input placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
