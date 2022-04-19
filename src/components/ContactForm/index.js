@@ -4,6 +4,7 @@ import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
 import { ButtonContainer, Form } from './styles';
+import isEmailValid from '../../utils/isEmailValid';
 
 export default function ContactForm({ buttonLabel }) {
 	const [name, setName] = useState('');
@@ -13,13 +14,26 @@ export default function ContactForm({ buttonLabel }) {
 	const [errors, setErrors] = useState([]);
 
 	function handleNameChange(event) {
-		const { value, name: fieldName } = event.target;
-		setName(value);
+		setName(event.target.value);
 
-		if (!value) {
-			setErrors((prevState) => [...prevState, { field: fieldName, message: 'Nome é obrigatório' }]);
+		if (!event.target.value) {
+			setErrors((prevState) => [...prevState, { field: event.target.name, message: 'Nome é obrigatório' }]);
 		} else {
-			setErrors((prevState) => prevState.filter((error) => error.field !== fieldName));
+			setErrors((prevState) => prevState.filter((error) => error.field !== event.target.name));
+		}
+	}
+
+	function handleEmailChange(event) {
+		setEmail(event.target.value);
+
+		if (event.target.value && !isEmailValid(event.target.value)) {
+			const emailErrorAlreadyExists = errors.find((error) => error.field === event.target.name);
+
+			if (emailErrorAlreadyExists) return;
+
+			setErrors((prevState) => [...prevState, { field: event.target.name, message: 'E-mail inválido' }]);
+		} else {
+			setErrors((prevState) => prevState.filter((error) => error.field !== event.target.name));
 		}
 	}
 
@@ -33,7 +47,7 @@ export default function ContactForm({ buttonLabel }) {
 				<Input placeholder="Nome" name="name" value={name} onChange={handleNameChange} />
 			</FormGroup>
 			<FormGroup>
-				<Input placeholder="Email" value={email} onChange={(event) => setEmail(event.target.value)} />
+				<Input placeholder="Email" value={email} onChange={handleEmailChange} />
 			</FormGroup>
 			<FormGroup>
 				<Input placeholder="Telefone" value={phone} onChange={(event) => setPhone(event.target.value)} />
