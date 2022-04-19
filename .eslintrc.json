@@ -50,6 +50,7 @@
 				"allowFunctions": true,
 				"allowArrowFunctions": true
 			}
-		]
+		],
+		"react/jsx-indent-props": "off"
 	}
 }

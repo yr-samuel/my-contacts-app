@@ -37,21 +37,45 @@ export default function ContactForm({ buttonLabel }) {
 		}
 	}
 
+	function getErrorMessageByFieldName(fieldName) {
+		const errorByFieldName = errors.find((error) => error.field === fieldName);
+		return errorByFieldName?.message;
+	}
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 	};
 
 	return (
 		<Form onSubmit={handleSubmit}>
-			<FormGroup>
-				<Input placeholder="Nome" name="name" value={name} onChange={handleNameChange} />
+			<FormGroup error={getErrorMessageByFieldName('name')}>
+				<Input
+					placeholder="Nome"
+					name="name"
+					value={name}
+					onChange={handleNameChange}
+					error={getErrorMessageByFieldName('name')}
+				/>
 			</FormGroup>
-			<FormGroup>
-				<Input placeholder="Email" value={email} onChange={handleEmailChange} />
+
+			<FormGroup error={getErrorMessageByFieldName('email')}>
+				<Input
+					placeholder="Email"
+					name="email"
+					value={email}
+					onChange={handleEmailChange}
+					error={getErrorMessageByFieldName('email')}
+				/>
 			</FormGroup>
+
 			<FormGroup>
-				<Input placeholder="Telefone" value={phone} onChange={(event) => setPhone(event.target.value)} />
+				<Input
+					placeholder="Telefone"
+					value={phone}
+					onChange={(event) => setPhone(event.target.value)}
+				/>
 			</FormGroup>
+
 			<FormGroup>
 				<Select value={category} onChange={(event) => setCategory(event.target.value)}>
 					<option value="">Categoria</option>
@@ -60,6 +84,7 @@ export default function ContactForm({ buttonLabel }) {
 					<option value="linkedin">Linkedin</option>
 				</Select>
 			</FormGroup>
+
 			<ButtonContainer>
 				<Button type="submit">{buttonLabel}</Button>
 			</ButtonContainer>
