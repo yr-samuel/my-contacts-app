@@ -12,7 +12,7 @@ export default function useErrors() {
 	}
 
 	function removeError(fieldName) {
-		setError((prevState) => prevState.filter((error) => error.field !== fieldName));
+		setErrors((prevState) => prevState.filter((error) => error.field !== fieldName));
 	}
 
 	function getErrorMessageByFieldName(fieldName) {
