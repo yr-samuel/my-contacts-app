@@ -49,10 +49,9 @@ export const Header = styled.header`
 	}
 `;
 
-export const ListContainer = styled.div`
+export const ListHeader = styled.header`
 	margin-top: 24px;
 
-	header {
 		margin-bottom: 8px;
 
 		.sort-button {
@@ -60,14 +59,19 @@ export const ListContainer = styled.div`
 			border: none;
 			display: flex;
 			align-items: center;
+
+			img {
+				transform: ${({ orderBy }) => (orderBy === 'asc' ? 'rotate(180deg)' : 'rotate(0)')};
+				transition: transform 0.2s ease-in-out;
+			}
+
+			span {
+				margin-right: 8px;
+				font-weight: bold;
+				color: ${(({ theme }) => theme.colors.primary.main)}
+			}
 		}
 
-		span {
-			margin-right: 8px;
-			font-weight: bold;
-			color: ${(({ theme }) => theme.colors.primary.main)}
-		}
-	}
 `;
 
 export const Card = styled.div`
